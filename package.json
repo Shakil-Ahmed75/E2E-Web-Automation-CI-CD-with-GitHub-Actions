@@ -1,0 +1,23 @@
+{
+  "name": "orangehrm-e2e-web-automation-ci-cd-with-github-actions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shakil-Ahmed75/OrangeHRM-E2E-Web-Automation-CI-CD-with-GitHub-Actions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Shakil-Ahmed75/OrangeHRM-E2E-Web-Automation-CI-CD-with-GitHub-Actions/issues"
+  },
+  "homepage": "https://github.com/Shakil-Ahmed75/OrangeHRM-E2E-Web-Automation-CI-CD-with-GitHub-Actions#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.0",
+    "@types/node": "^25.0.10"
+  }
+}
