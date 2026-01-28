@@ -24,10 +24,10 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test --reporter=html # ensure HTML report is generated
+        run: npx playwright test --reporter=html  # ensure HTML report is generated
 
       - name: Upload Playwright HTML Report
-        if: ${{ always() }} # upload even if tests fail
+        if: ${{ always() }}   # upload even if tests fail
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
