@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { SwagLabsLocators } from "../../locators/swagLabs/Locators";
+import { SwagLabsLocators } from "../../locators/swagLabs/swagLabsLocators";
 
 export class SwagLabsActions extends SwagLabsLocators {
   constructor(page: Page) {
