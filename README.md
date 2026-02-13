@@ -10,7 +10,7 @@ This project implements comprehensive E2E (End-to-End) web automation testing fo
 
 ### Key Features
 
-- ✅ **Multi-Application Testing**: Supports testing for OrangeHRM and SwagLabs applications
+- ✅ **Multi-Application Testing**: Supports testing for multiple web applications
 - ✅ **CI/CD Integration**: Automated testing via GitHub Actions
 - ✅ **Page Object Model (POM)**: Clean, maintainable test architecture
 - ✅ **Multiple Reporters**: HTML reports, Allure reports, and console output
@@ -26,21 +26,16 @@ This project implements comprehensive E2E (End-to-End) web automation testing fo
 │   └── workflows/
 │       └── playwright.yml          # GitHub Actions CI/CD workflow
 ├── config/
-│   ├── orangeHrm.ts                # OrangeHRM application configuration
-│   └── swagLabs.ts                 # SwagLabs application configuration
+│   └── *.ts                        # Application configuration files
 ├── e2e/
 │   └── testCases/
-│       ├── OrangeHRM/
-│       │   └── orangeHrmLogin.negative.spec.ts
-│       └── SwagLabs/
-│           └── swagLabs.spec.ts
+│       └── *.spec.ts               # Test specification files
 ├── fixtures/
 │   └── tags.ts                     # Test tagging configuration
 ├── pages/
 │   ├── actions/                    # Page action classes
 │   ├── locators/                   # Page locator classes
-│   ├── orangeHrmPage.ts           # OrangeHRM page object
-│   └── swagLabsPage.ts            # SwagLabs page object
+│   └── *.ts                        # Page object files
 ├── playwright.config.ts            # Playwright configuration
 ├── package.json                    # Project dependencies
 └── README.md                       # This file
@@ -77,15 +72,10 @@ This project implements comprehensive E2E (End-to-End) web automation testing fo
 Create a `.env` file in the root directory (optional - defaults are provided):
 
 ```env
-# OrangeHRM Configuration
-ORANGEHRM_BASE_URL=https://opensource-demo.orangehrmlive.com
-ORANGEHRM_USERNAME=Admin
-ORANGEHRM_PASSWORD=admin123
-
-# SwagLabs Configuration
-BASE_URL=https://www.saucedemo.com
-SWAGLABS_USERNAME=standard_user
-SWAGLABS_PASSWORD=secret_sauce
+# Application Configuration
+BASE_URL=your_application_url
+USERNAME=your_username
+PASSWORD=your_password
 ```
 
 ## 🧪 Running Tests
@@ -99,11 +89,8 @@ npx playwright test
 ### Run Tests for Specific Project
 
 ```bash
-# Run OrangeHRM tests only
-npx playwright test --project=OrangeHRM
-
-# Run SwagLabs tests only
-npx playwright test --project=SwagLabs
+# Run tests for a specific project
+npx playwright test --project=ProjectName
 ```
 
 ### Run Tests in Headed Mode (UI Mode)
@@ -125,7 +112,7 @@ npx playwright test --debug
 ### Run Specific Test File
 
 ```bash
-npx playwright test e2e/testCases/OrangeHRM/orangeHrmLogin.negative.spec.ts
+npx playwright test e2e/testCases/path/to/your-test.spec.ts
 ```
 
 ## 📊 Test Reports
@@ -171,10 +158,7 @@ The `playwright.config.ts` file contains all test configuration:
 
 ### Projects
 
-The configuration includes two test projects:
-
-1. **OrangeHRM**: Tests for OrangeHRM application
-2. **SwagLabs**: Tests for SwagLabs demo application
+The configuration supports multiple test projects. Each project can be configured with specific browser settings and test patterns in `playwright.config.ts`.
 
 ## 🔄 CI/CD Pipeline
 
@@ -195,26 +179,13 @@ The project includes a GitHub Actions workflow (`.github/workflows/playwright.ym
 2. Click on the latest workflow run
 3. Download the `playwright-report` artifact to view test results
 
-## 📝 Test Cases
-
-### OrangeHRM Test Cases
-
-- **TC001**: Verify error message for invalid credentials
-- **TC002**: Verify required validation when username and password are empty
-- **TC003**: Verify required validation when password is empty
-- **TC004**: Verify required validation when username is empty
-
-### SwagLabs Test Cases
-
-- **TC001**: Verify user can log in with valid credentials and see inventory page
-
 ## 🏛️ Architecture
 
 ### Page Object Model (POM)
 
 The project follows the Page Object Model pattern:
 
-- **Pages**: High-level page objects (`orangeHrmPage.ts`, `swagLabsPage.ts`)
+- **Pages**: High-level page objects for each application page
 - **Locators**: Centralized element locators (`pages/locators/`)
 - **Actions**: Reusable action methods (`pages/actions/`)
 - **Config**: Environment-specific configuration (`config/`)
@@ -274,8 +245,6 @@ For issues, questions, or contributions, please open an issue on the [GitHub Iss
 ## 🙏 Acknowledgments
 
 - [Playwright](https://playwright.dev/) for the excellent testing framework
-- [OrangeHRM](https://www.orangehrm.com/) for the demo application
-- [SwagLabs](https://www.saucedemo.com/) for the demo application
 
 ---
 
