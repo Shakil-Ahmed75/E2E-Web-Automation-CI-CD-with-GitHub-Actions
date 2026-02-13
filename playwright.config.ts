@@ -25,5 +25,10 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
       testMatch: "SwagLabs/*.spec.ts",
     },
+    {
+      name: "OrangeHRM",
+      use: { ...devices["Desktop Chrome"] },
+      testMatch: "OrangeHRM/*.spec.ts",
+    },
   ],
 });

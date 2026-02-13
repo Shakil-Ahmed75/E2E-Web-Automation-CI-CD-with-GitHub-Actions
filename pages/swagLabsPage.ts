@@ -12,7 +12,7 @@ export class SwagLabsLoginPage extends SwagLabsBasePage {
   }
 
   async loginToSwagLabs(): Promise<void> {
-    this.navigateToLogin();
+    await this.navigateToLogin();
     await this.swagLabsActions.loginPage(
       swagLabsConfig.username,
       swagLabsConfig.password,
