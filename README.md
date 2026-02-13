@@ -1,31 +1,65 @@
-# OrangeHRM E2E Web Automation with CI/CD
+# E2E Web Automation – CI/CD with GitHub Actions
 
-A comprehensive end-to-end web automation testing framework built with Playwright and TypeScript, featuring CI/CD integration with GitHub Actions.
+[![CI/CD](https://github.com/Shakil-Ahmed75/E2E-Web-Automation-CI-CD-with-GitHub-Actions/actions/workflows/playwright.yml/badge.svg)](https://github.com/Shakil-Ahmed75/E2E-Web-Automation-CI-CD-with-GitHub-Actions/actions/workflows/playwright.yml)
 
-## 🚀 Features
+An end-to-end automation project that validates critical HR workflows and runs automated tests through a GitHub Actions CI/CD pipeline to ensure faster releases, early bug detection, and improved application quality.
 
-- **Playwright Framework**: Modern, reliable end-to-end testing
-- **TypeScript**: Type-safe test development
-- **Page Object Model (POM)**: Maintainable and scalable test architecture
-- **CI/CD Integration**: Automated testing with GitHub Actions
-- **Multiple Test Suites**: Support for OrangeHRM and SwagLabs applications
-- **Comprehensive Reporting**: HTML reports and Allure integration
-- **Headed/Headless Mode**: Automatic switching based on environment
-- **Video Recording**: Automatic video capture for failed tests
-- **Trace Viewer**: Detailed trace files for debugging
+## 🎯 Overview
 
-## 📋 Prerequisites
+This project implements comprehensive E2E (End-to-End) web automation testing for multiple applications using **Playwright** and **TypeScript**. It features a robust CI/CD pipeline integrated with GitHub Actions that automatically runs tests on every push and pull request.
+
+### Key Features
+
+- ✅ **Multi-Application Testing**: Supports testing for OrangeHRM and SwagLabs applications
+- ✅ **CI/CD Integration**: Automated testing via GitHub Actions
+- ✅ **Page Object Model (POM)**: Clean, maintainable test architecture
+- ✅ **Multiple Reporters**: HTML reports, Allure reports, and console output
+- ✅ **Environment Configuration**: Flexible configuration via environment variables
+- ✅ **Headed/Headless Mode**: Smart configuration for local development and CI environments
+- ✅ **Test Isolation**: Serial test execution for better reliability
+- ✅ **Video & Trace Recording**: Automatic recording on test failures
+
+## 🏗️ Project Structure
+
+```
+├── .github/
+│   └── workflows/
+│       └── playwright.yml          # GitHub Actions CI/CD workflow
+├── config/
+│   ├── orangeHrm.ts                # OrangeHRM application configuration
+│   └── swagLabs.ts                 # SwagLabs application configuration
+├── e2e/
+│   └── testCases/
+│       ├── OrangeHRM/
+│       │   └── orangeHrmLogin.negative.spec.ts
+│       └── SwagLabs/
+│           └── swagLabs.spec.ts
+├── fixtures/
+│   └── tags.ts                     # Test tagging configuration
+├── pages/
+│   ├── actions/                    # Page action classes
+│   ├── locators/                   # Page locator classes
+│   ├── orangeHrmPage.ts           # OrangeHRM page object
+│   └── swagLabsPage.ts            # SwagLabs page object
+├── playwright.config.ts            # Playwright configuration
+├── package.json                    # Project dependencies
+└── README.md                       # This file
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
 
 - **Node.js**: v18 or higher (LTS recommended)
 - **npm**: v9 or higher
-- **Git**: For version control
+- **Git**: Latest version
 
-## 🛠️ Installation
+### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Shakil-Ahmed75/OrangeHRM-E2E-Web-Automation-CI-CD-with-GitHub-Actions.git
-   cd OrangeHRM-E2E-Web-Automation-CI-CD-with-GitHub-Actions
+   git clone https://github.com/Shakil-Ahmed75/E2E-Web-Automation-CI-CD-with-GitHub-Actions.git
+   cd E2E-Web-Automation-CI-CD-with-GitHub-Actions
    ```
 
 2. **Install dependencies**
@@ -38,11 +72,9 @@ A comprehensive end-to-end web automation testing framework built with Playwrigh
    npx playwright install --with-deps
    ```
 
-## ⚙️ Configuration
+### Environment Configuration
 
-### Environment Variables
-
-Create a `.env` file in the root directory (optional, defaults are provided):
+Create a `.env` file in the root directory (optional - defaults are provided):
 
 ```env
 # OrangeHRM Configuration
@@ -50,126 +82,99 @@ ORANGEHRM_BASE_URL=https://opensource-demo.orangehrmlive.com
 ORANGEHRM_USERNAME=Admin
 ORANGEHRM_PASSWORD=admin123
 
-# SwagLabs Configuration (if needed)
-SWAGLABS_BASE_URL=https://www.saucedemo.com
+# SwagLabs Configuration
+BASE_URL=https://www.saucedemo.com
+SWAGLABS_USERNAME=standard_user
+SWAGLABS_PASSWORD=secret_sauce
 ```
-
-### Playwright Configuration
-
-The framework automatically configures:
-- **Local Development**: Runs in headed mode (browser visible)
-- **CI Environment**: Runs in headless mode (optimized for CI/CD)
-- **Test Timeout**: 2 minutes per test
-- **Retries**: 2 retries in CI, 0 locally
-- **Parallel Execution**: Disabled for better test isolation
 
 ## 🧪 Running Tests
 
 ### Run All Tests
+
 ```bash
 npx playwright test
 ```
 
-### Run Specific Test Suite
+### Run Tests for Specific Project
 
-**OrangeHRM Tests:**
 ```bash
+# Run OrangeHRM tests only
 npx playwright test --project=OrangeHRM
-```
 
-**SwagLabs Tests:**
-```bash
+# Run SwagLabs tests only
 npx playwright test --project=SwagLabs
 ```
 
-### Run Tests in UI Mode (Headed)
-```bash
-npx playwright test --headed
-```
+### Run Tests in Headed Mode (UI Mode)
 
-### Run Tests in UI Mode (Playwright UI)
 ```bash
+# Run tests with browser visible (default for local development)
+npx playwright test --headed
+
+# Or use UI mode for interactive debugging
 npx playwright test --ui
 ```
 
-### Run Specific Test File
+### Run Tests in Debug Mode
+
 ```bash
-npx playwright test orangeHrmLogin.negative.spec.ts
+npx playwright test --debug
 ```
 
-### Run Tests with Specific Tag
+### Run Specific Test File
+
 ```bash
-npx playwright test --grep @orangeHRM
+npx playwright test e2e/testCases/OrangeHRM/orangeHrmLogin.negative.spec.ts
 ```
 
 ## 📊 Test Reports
 
 ### HTML Report
+
 After running tests, view the HTML report:
+
 ```bash
 npx playwright show-report
 ```
 
-Reports are generated in:
-- `reports/html/` - Custom HTML reports
-- `playwright-report/` - Default Playwright HTML reports
+The report is also generated at: `reports/html/`
 
 ### Allure Report
-Generate and view Allure reports:
+
+Generate and view Allure report:
+
 ```bash
 # Generate Allure results
-npx playwright test
+npx allure generate allure-results --clean
 
-# Serve Allure report
-npx allure serve allure-results
+# Open Allure report
+npx allure open
 ```
 
-## 📁 Project Structure
+## 🔧 Configuration
 
-```
-├── .github/
-│   └── workflows/
-│       └── playwright.yml          # GitHub Actions CI/CD workflow
-├── config/
-│   ├── orangeHrm.ts                 # OrangeHRM configuration
-│   └── swagLabs.ts                  # SwagLabs configuration
-├── e2e/
-│   └── testCases/
-│       ├── OrangeHRM/               # OrangeHRM test cases
-│       │   └── orangeHrmLogin.negative.spec.ts
-│       └── SwagLabs/                # SwagLabs test cases
-│           └── swagLabs.spec.ts
-├── fixtures/
-│   └── tags.ts                      # Test tags and fixtures
-├── pages/
-│   ├── actions/                     # Page action classes
-│   │   ├── orangeHrmActions/
-│   │   └── swagLabsActions/
-│   ├── locators/                    # Page locator classes
-│   │   ├── orangeHrm/
-│   │   └── swagLabs/
-│   ├── orangeHrmPage.ts            # OrangeHRM page object
-│   └── swagLabsPage.ts              # SwagLabs page object
-├── playwright.config.ts             # Playwright configuration
-├── package.json                     # Project dependencies
-└── README.md                        # Project documentation
-```
+### Playwright Configuration
 
-## 🏗️ Architecture
+The `playwright.config.ts` file contains all test configuration:
 
-### Page Object Model (POM)
+- **Test Directory**: `./e2e/testCases`
+- **Timeout**: 2 minutes per test
+- **Retries**: 2 retries in CI, 0 locally
+- **Parallel Execution**: Disabled (serial mode) for better test isolation
+- **Headless Mode**: 
+  - `false` for local development (headed mode)
+  - `true` for CI environments (automatic)
+- **Reporters**: List, HTML, and Allure
+- **Video**: Recorded on test failures
+- **Trace**: Recorded on first retry
 
-The framework follows the Page Object Model pattern:
+### Projects
 
-- **Locators**: Element selectors organized by page
-- **Actions**: Reusable action methods
-- **Pages**: Main page object classes combining locators and actions
+The configuration includes two test projects:
 
-### Test Organization
-
-- Tests are organized by application (OrangeHRM, SwagLabs)
-- Each test suite has its own configuration
-- Tests use tags for filtering and organization
+1. **OrangeHRM**: Tests for OrangeHRM application
+2. **SwagLabs**: Tests for SwagLabs demo application
 
 ## 🔄 CI/CD Pipeline
 
@@ -177,59 +182,71 @@ The framework follows the Page Object Model pattern:
 
 The project includes a GitHub Actions workflow (`.github/workflows/playwright.yml`) that:
 
-1. **Triggers**: On push and pull requests to `main`/`master` branches
-2. **Environment**: Runs on Ubuntu latest
-3. **Steps**:
-   - Checks out code
-   - Sets up Node.js (LTS)
-   - Installs dependencies (`npm ci`)
-   - Installs Playwright browsers
-   - Runs tests in headless mode
-   - Uploads HTML reports as artifacts
+1. ✅ Triggers on push and pull requests to `main`/`master` branches
+2. ✅ Sets up Node.js environment
+3. ✅ Installs dependencies using `npm ci`
+4. ✅ Installs Playwright browsers
+5. ✅ Runs all tests in headless mode
+6. ✅ Uploads HTML reports as artifacts (retained for 30 days)
 
-### Viewing CI Results
+### Viewing CI/CD Results
 
-1. Go to the **Actions** tab in GitHub
-2. Select the workflow run
+1. Go to the **Actions** tab in your GitHub repository
+2. Click on the latest workflow run
 3. Download the `playwright-report` artifact to view test results
 
-## 🧩 Test Cases
+## 📝 Test Cases
 
-### OrangeHRM Test Suite
+### OrangeHRM Test Cases
 
-- **TC001**: Invalid credentials error validation
-- **TC002**: Required validation for empty username and password
-- **TC003**: Required validation for empty password
-- **TC004**: Required validation for empty username
+- **TC001**: Verify error message for invalid credentials
+- **TC002**: Verify required validation when username and password are empty
+- **TC003**: Verify required validation when password is empty
+- **TC004**: Verify required validation when username is empty
 
-### SwagLabs Test Suite
+### SwagLabs Test Cases
 
-- **TC001**: Login with valid credentials and verify inventory page
+- **TC001**: Verify user can log in with valid credentials and see inventory page
 
-## 🐛 Debugging
+## 🏛️ Architecture
 
-### Debug Mode
-Run tests in debug mode:
-```bash
-npx playwright test --debug
-```
+### Page Object Model (POM)
 
-### Trace Viewer
-View detailed traces for failed tests:
-```bash
-npx playwright show-trace trace.zip
-```
+The project follows the Page Object Model pattern:
 
-### Video Playback
-Videos are automatically recorded for all tests and saved in `test-results/`
+- **Pages**: High-level page objects (`orangeHrmPage.ts`, `swagLabsPage.ts`)
+- **Locators**: Centralized element locators (`pages/locators/`)
+- **Actions**: Reusable action methods (`pages/actions/`)
+- **Config**: Environment-specific configuration (`config/`)
 
-## 📝 Best Practices
+### Benefits
 
-1. **Use Page Object Model**: Keep locators and actions in page objects
-2. **Use Test Tags**: Organize tests with tags for easy filtering
-3. **Environment Variables**: Use `.env` for sensitive data
-4. **Test Isolation**: Tests run sequentially to avoid interference
-5. **Meaningful Assertions**: Use descriptive assertion messages
+- ✅ **Maintainability**: Changes to UI elements require updates in one place
+- ✅ **Reusability**: Page objects can be reused across multiple tests
+- ✅ **Readability**: Tests are more readable and expressive
+- ✅ **Scalability**: Easy to add new pages and tests
+
+## 🛠️ Technologies Used
+
+- **[Playwright](https://playwright.dev/)**: Modern end-to-end testing framework
+- **[TypeScript](https://www.typescriptlang.org/)**: Type-safe JavaScript
+- **[Allure](https://docs.qameta.io/allure/)**: Test reporting framework
+- **[GitHub Actions](https://github.com/features/actions)**: CI/CD automation
+- **[dotenv](https://www.npmjs.com/package/dotenv)**: Environment variable management
+
+## 📦 Dependencies
+
+### Dev Dependencies
+
+- `@playwright/test`: ^1.58.0
+- `@types/node`: ^25.0.10
+- `allure-playwright`: ^3.4.5
+- `npm-run-all`: ^4.1.5
+
+### Dependencies
+
+- `dotenv`: ^17.2.3
+- `dotenv-flow`: ^4.1.0
 
 ## 🤝 Contributing
 
@@ -248,18 +265,18 @@ This project is licensed under the ISC License.
 **Shakil Ahmed**
 
 - GitHub: [@Shakil-Ahmed75](https://github.com/Shakil-Ahmed75)
-- Repository: [OrangeHRM-E2E-Web-Automation-CI-CD-with-GitHub-Actions](https://github.com/Shakil-Ahmed75/OrangeHRM-E2E-Web-Automation-CI-CD-with-GitHub-Actions)
+- Repository: [E2E-Web-Automation-CI-CD-with-GitHub-Actions](https://github.com/Shakil-Ahmed75/E2E-Web-Automation-CI-CD-with-GitHub-Actions)
 
-## 🐛 Issues
+## 📞 Support
 
-If you encounter any issues, please file them in the [Issues](https://github.com/Shakil-Ahmed75/OrangeHRM-E2E-Web-Automation-CI-CD-with-GitHub-Actions/issues) section.
+For issues, questions, or contributions, please open an issue on the [GitHub Issues](https://github.com/Shakil-Ahmed75/E2E-Web-Automation-CI-CD-with-GitHub-Actions/issues) page.
 
-## 📚 Resources
+## 🙏 Acknowledgments
 
-- [Playwright Documentation](https://playwright.dev/)
-- [TypeScript Documentation](https://www.typescriptlang.org/)
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [Playwright](https://playwright.dev/) for the excellent testing framework
+- [OrangeHRM](https://www.orangehrm.com/) for the demo application
+- [SwagLabs](https://www.saucedemo.com/) for the demo application
 
 ---
 
-**Happy Testing! 🎉**
+⭐ If you find this project helpful, please consider giving it a star!
