@@ -1,6 +1,6 @@
 import { test, Page, expect } from "@playwright/test";
 import { WebSiteName } from "../../../fixtures/tags";
-import { SwagLabsLoginPage } from "../../../pages/swagLabsPage";
+import { SwagLabsPage } from "../../../pages/swagLabsPage";
 
 let page: Page;
 
@@ -10,7 +10,7 @@ test.describe("SwagLabs Test Cases.", () => {
   test.beforeAll(async ({ browser }) => {
     const context = await browser.newContext();
     page = await context.newPage();
-    const loginPage = new SwagLabsLoginPage(page);
+    const loginPage = new SwagLabsPage(page);
 
     await test.step("Log in to SwagLabs using valid credentials.", async () => {
       await loginPage.loginToSwagLabs();
