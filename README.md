@@ -8,7 +8,7 @@ An end-to-end automation project that validates critical HR workflows and runs a
 
 This project implements comprehensive E2E (End-to-End) web automation testing for multiple applications using **Playwright** and **TypeScript**. It features a robust CI/CD pipeline integrated with GitHub Actions that automatically runs tests on every push and pull request.
 
-### Key Features
+### Key Features.
 
 - ✅ **Multi-Application Testing**: Supports testing for multiple web applications
 - ✅ **CI/CD Integration**: Automated testing via GitHub Actions
